@@ -1,17 +1,21 @@
 <?php
 
-require_once "DatabaseConnection.php";
+require_once "../../DatabaseConnection.php";
 
 function getUsers()
 {
-    global $conn;
+    $db = new DatabaseConnection();
+
+    $conn = $db->openConnection();
 
     $query = "SELECT * FROM users";
 
-    $result = mysqli_query($conn, $query);
+    $result = $conn->query($query);
 
     return $result;
 }
 
 ?>
+
+
 

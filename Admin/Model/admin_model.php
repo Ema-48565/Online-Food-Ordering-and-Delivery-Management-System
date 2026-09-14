@@ -1,18 +1,20 @@
 <?php
 
-require_once "DatabaseConnection.php";
+require_once "../../DatabaseConnection.php";
 
 function getAdmin($username, $password)
 {
-    global $conn;
+    $db = new DatabaseConnection();
 
-    $query = "SELECT * FROM admins 
-              WHERE username = '$username' 
-              AND password = '$password'";
+    $conn = $db->openConnection();
 
-    $result = mysqli_query($conn, $query);
+    $query = "SELECT * FROM admins
+              WHERE username='$username'
+              AND password='$password'";
 
-    return mysqli_fetch_assoc($result);
+    $result = $conn->query($query);
+
+    return $result->fetch_assoc();
 }
 
 ?>

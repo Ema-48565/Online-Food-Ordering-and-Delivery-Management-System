@@ -14,7 +14,7 @@ session_start();
     <h2>Welcome, Admin!</h2>
 
     <a href="../Controller/dashboard_check.php">Dashboard</a> |
-    <a href="../Controller/users_controller.php">Users</a>
+    <a href="../Controller/users_controller.php">Users</a>|
     <a href="restaurants.php">Restaurants</a> |
     <a href="orders.php">Orders</a> |
     <a href="../Controller/logout.php">Logout</a>
