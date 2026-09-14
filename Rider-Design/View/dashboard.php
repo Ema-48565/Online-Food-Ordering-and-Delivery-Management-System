@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Model/DatabaseConnection.php');
+include_once('../Model/RiderModel.php');
 
 if (!isset($_SESSION['rider_id'])) {
     header("Location: login.php");
@@ -44,10 +44,9 @@ $rider_id = $_SESSION['rider_id'];
                 <th>Action</th>
             </tr>
             <?php
-            $db = new DatabaseConnection();
-            $conn = $db->openConnection();
-
-            $result = $db->getDeliveries($conn, $rider_id);
+        
+            $riderModel = new RiderModel();
+            $result = $riderModel->getDeliveries($rider_id);
 
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -83,7 +82,6 @@ $rider_id = $_SESSION['rider_id'];
             } else {
                 echo "<tr><td colspan='6'>No deliveries found.</td></tr>";
             }
-            $conn->close();
             ?>
         </table>
     </div>

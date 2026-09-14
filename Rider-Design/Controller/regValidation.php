@@ -1,18 +1,15 @@
 <?php
-include('../Model/DatabaseConnection.php');
+include('../Model/RiderModel.php');
 
 if (isset($_POST['register'])) {
     $username = $_POST['username'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
 
-    $db = new DatabaseConnection();
-    $conn = $db->openConnection();
+    $riderModel = new RiderModel();
 
-    //check backend username
-    $check_result = $db->checkUsername($conn, $username);
+    $check_result = $riderModel->checkUsername($username);
     if ($check_result->num_rows > 0) {
-        $conn->close();
         header("Location: ../View/registration.php?error=Username already taken!");
         exit();
     }
@@ -23,12 +20,10 @@ if (isset($_POST['register'])) {
         move_uploaded_file($_FILES['file']['tmp_name'], $file_path);
     }
 
-    if ($db->registerRider($conn, $username, $password, $phone, $file_path) === TRUE) {
-        $conn->close();
+    if ($riderModel->registerRider($username, $password, $phone, $file_path) === TRUE) {
         header("Location: ../View/login.php?success=Registration successful");
         exit();
     } else {
-        $conn->close();
         header("Location: ../View/registration.php?error=Database error");
         exit();
     }

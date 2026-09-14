@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Model/DatabaseConnection.php');
+include('../Model/RiderModel.php');
 
 if (!isset($_SESSION['rider_id'])) {
     header("Location: ../View/login.php");
@@ -12,16 +12,13 @@ if (isset($_POST['update'])) {
     $username = $_POST['username'];
     $phone = $_POST['phone'];
 
-    $db = new DatabaseConnection();
-    $conn = $db->openConnection();
+    $riderModel = new RiderModel();
 
-    if ($db->updateProfile($conn, $rider_id, $username, $phone) === TRUE) {
+    if ($riderModel->updateProfile($rider_id, $username, $phone) === TRUE) {
         $_SESSION['rider_username'] = $username;
-        $conn->close();
         header("Location: ../View/profile.php?success=Updated successfully");
         exit();
     } else {
-        $conn->close();
         header("Location: ../View/profile.php?error=Update failed");
         exit();
     }

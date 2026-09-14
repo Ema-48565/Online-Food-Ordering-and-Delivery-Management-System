@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Model/DatabaseConnection.php');
+include('../Model/RiderModel.php');
 
 if (!isset($_SESSION['rider_id'])) {
     header("Location: ../View/login.php");
@@ -8,18 +8,14 @@ if (!isset($_SESSION['rider_id'])) {
 }
 
 $rider_id = $_SESSION['rider_id'];
+$riderModel = new RiderModel();
 
-$db = new DatabaseConnection();
-$conn = $db->openConnection();
-
-if ($db->deleteAccount($conn, $rider_id) === TRUE) {
-    $conn->close();
+if ($riderModel->deleteAccount($rider_id) === TRUE) {
     session_unset();
     session_destroy();
     header("Location: ../View/login.php?success=Account deleted successfully");
     exit();
 } else {
-    $conn->close();
     header("Location: ../View/profile.php?error=Failed to delete account");
     exit();
 }

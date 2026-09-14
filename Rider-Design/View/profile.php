@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Model/DatabaseConnection.php');
+include_once('../Model/RiderModel.php');
 
 if (!isset($_SESSION['rider_id'])) {
     header("Location: login.php");
@@ -9,12 +9,10 @@ if (!isset($_SESSION['rider_id'])) {
 
 $rider_id = $_SESSION['rider_id'];
 
-$db = new DatabaseConnection();
-$conn = $db->openConnection();
 
-$result = $db->getRiderById($conn, $rider_id);
+$riderModel = new RiderModel();
+$result = $riderModel->getRiderById($rider_id);
 $rider = $result->fetch_assoc();
-$conn->close();
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../Model/DatabaseConnection.php');
+include('../Model/RiderModel.php');
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -11,20 +11,16 @@ if (isset($_POST['login'])) {
         exit();
     }
     
-    $db = new DatabaseConnection();
-    $conn = $db->openConnection();
-
-    $result = $db->loginRider($conn, $username, $password);
+    $riderModel = new RiderModel();
+    $result = $riderModel->loginRider($username, $password);
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         $_SESSION['rider_id'] = $row['id'];
         $_SESSION['rider_username'] = $row['username'];
-        $conn->close();
         header("Location: ../View/dashboard.php");
         exit();
     } else {
-        $conn->close();
         header("Location: ../View/login.php?error=Invalid username or password");
         exit();
     }
