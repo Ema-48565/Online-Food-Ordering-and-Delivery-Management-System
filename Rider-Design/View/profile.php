@@ -1,57 +1,77 @@
+<?php
+session_start();
+include('../Model/DatabaseConnection.php');
+
+if (!isset($_SESSION['rider_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$rider_id = $_SESSION['rider_id'];
+
+$db = new DatabaseConnection();
+$conn = $db->openConnection();
+
+$result = $db->getRiderById($conn, $rider_id);
+$rider = $result->fetch_assoc();
+$conn->close();
+?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Profile</title>
+    <title>Rider Profile</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        input {
+            width: 250px;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Rider Profile & Account Management</h2>
-    <a href="dashboard.php">Assigned Orders</a> | 
-    <a href="history.php">Delivery History</a> | 
-    <a href="profile.php">My Profile</a> | 
-    <a href="login.php">Logout</a>
-    <hr/>
+    <div>
+        <h2>Manage Profile</h2>
+        <p><a href="dashboard.php">Back to Dashboard</a> | <a href="../Controller/logout.php">Logout</a></p>
 
-    <h3>Profile Information</h3>
-    <form action="#" method="post">
-        <table>
-            <tr>
-                <td>Username:</td>
-                <td><b>rider_demo</b></td>
-            </tr>
-            <tr>
-                <td>Phone:</td>
-                <td><input type="text" name="phone" value="01700000000" /></td>
-            </tr>
-            <tr>
-                <td>Uploaded File:</td>
-                <td>nid_doc.pdf</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Update Profile" /></td>
-            </tr>
-        </table>
-    </form>
+        <?php 
+        if(isset($_GET['success'])) { echo "<p style='color:green;'>".$_GET['success']."</p>"; }
+        if(isset($_GET['error'])) { echo "<p style='color:red;'>".$_GET['error']."</p>"; }
+        ?>
 
-    <hr/>
-    <h3>Change Password</h3>
-    <form action="#" method="post">
-        <table>
-            <tr>
-                <td>New Password:</td>
-                <td><input type="password" name="new_password" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Update Password" /></td>
-            </tr>
-        </table>
-    </form>
+        <form action="../Controller/updateProfile.php" method="POST">
+            <label>Username:</label><br>
+            <input type="text" name="username" value="<?php echo $rider['username']; ?>" required><br><br>
+            
+            <label>Phone:</label><br>
+            <input type="text" name="phone" value="<?php echo $rider['phone']; ?>" required><br><br>
+            
+            <button type="submit" name="update">Update Profile</button>
+        </form>
 
-    <hr/>
-    <h3>Delete Account</h3>
-    <form action="#" method="post">
-        <input type="submit" value="Delete My Account" style="color:red;" />
-    </form>
+        <hr>
+
+        <h3>Change Password</h3>
+        <form action="../Controller/changePassword.php" method="POST">
+            <label>Old Password:</label><br>
+            <input type="password" name="old_password" required><br><br>
+            <label>New Password:</label><br>
+            <input type="password" name="new_password" required><br><br>
+            <button type="submit" name="change_pass">Change Password</button>
+        </form>
+
+        <hr>
+
+        <h3>Delete Account</h3>
+        <form action="../Controller/deleteAccount.php" method="POST" onsubmit="return confirm('Are you sure you want to delete your account?');">
+            <button type="submit" style="color: red;">Delete My Account</button>
+        </form>
+    </div>
 </body>
 </html>
