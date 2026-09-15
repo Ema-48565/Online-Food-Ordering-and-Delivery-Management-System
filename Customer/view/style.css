@@ -1,0 +1,61 @@
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body { margin: 0; background: #f2f2f2; color: #222; }
+
+.container { max-width: 960px; margin: 20px auto; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 15px 20px; }
+
+.topbar { display: flex; align-items: center; gap: 15px; padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 15px; }
+.topbar .logo { font-weight: bold; border: 1px solid #ccc; padding: 6px 14px; border-radius: 4px; }
+.topbar form { flex: 1; }
+.topbar input[type="text"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.topbar a, .topbar .link { border: 1px solid #ccc; padding: 6px 14px; border-radius: 4px; text-decoration: none; color: #222; white-space: nowrap; }
+
+.section-title { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 8px; font-weight: bold; }
+.section-title a { font-size: 12px; color: #888; text-decoration: none; }
+
+.pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.pill { border: 1px solid #ccc; padding: 8px 16px; border-radius: 4px; font-size: 13px; }
+.pill.active { background: #ff5a1f; color: #fff; border-color: #ff5a1f; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.card { border: 1px solid #ddd; border-radius: 6px; padding: 12px; text-align: left; }
+.card .name { font-weight: bold; margin-bottom: 4px; }
+.card .meta, .card .price { color: #666; font-size: 13px; margin-bottom: 6px; }
+.card .price { color: #ff5a1f; font-weight: bold; }
+.card a, .card button { display: inline-block; width: 100%; text-align: center; background: #fff; border: 1px solid #ccc; border-radius: 4px; padding: 6px; cursor: pointer; text-decoration: none; color: #222; }
+
+.bottom-nav { display: flex; justify-content: space-around; border-top: 1px solid #eee; margin-top: 20px; padding-top: 12px; }
+.bottom-nav a, .bottom-nav span { text-decoration: none; color: #444; font-size: 13px; }
+
+.two-col { display: flex; gap: 25px; }
+.two-col .left { flex: 2; }
+.two-col .right { flex: 1; border-left: 1px solid #eee; padding-left: 20px; }
+
+.food-img-box { width: 100%; height: 200px; background: #eee; border-radius: 6px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #999; }
+
+.qty-box { display: flex; align-items: center; gap: 10px; margin: 12px 0; }
+.qty-box input { width: 50px; text-align: center; padding: 6px; border: 1px solid #ccc; border-radius: 4px; }
+
+.btn-primary { display: inline-block; background: #ff5a1f; color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; text-decoration: none; font-weight: bold; }
+.btn-primary:hover { background: #e14e15; }
+
+.cart-line { display: flex; justify-content: space-between; padding: 6px 0; font-size: 14px; border-bottom: 1px dashed #eee; }
+.cart-line small { color: #999; }
+.cart-line a.remove { color: red; font-size: 11px; text-decoration: none; margin-left: 8px; }
+
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 13px; margin-bottom: 5px; font-weight: bold; color: #333; }
+.form-group input, .form-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.error-text { color: red; font-size: 12px; }
+
+.payment-options label { display: inline-block; border: 1px solid #ccc; padding: 8px 14px; border-radius: 4px; margin-right: 10px; cursor: pointer; }
+
+.status-track { display: flex; justify-content: space-between; margin: 25px 0; }
+.status-step { flex: 1; text-align: center; position: relative; color: #999; font-size: 13px; }
+.status-step .dot { width: 16px; height: 16px; border-radius: 50%; background: #ccc; margin: 0 auto 8px; }
+.status-step.done { color: #ff5a1f; font-weight: bold; }
+.status-step.done .dot { background: #ff5a1f; }
+.status-step .sub { font-size: 11px; color: #aaa; }
+
+.auth-box { max-width: 380px; margin: 60px auto; border: 1px solid #ddd; border-radius: 6px; padding: 25px; }
+.auth-box h2 { text-align: center; margin-bottom: 20px; }
+.auth-box .switch-link { text-align: center; margin-top: 12px; font-size: 13px; }
