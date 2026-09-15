@@ -1,82 +1,57 @@
-<?php
-session_start();
-?>
-
 <!DOCTYPE html>
+
 <html>
 
 <head>
+
     <title>Admin Dashboard</title>
+
 </head>
 
 <body>
 
-    <h2>Welcome, Admin!</h2>
+    <h2>Admin Dashboard</h2>
+
+    <p>Welcome, Admin!</p>
 
     <a href="../Controller/dashboard_check.php">Dashboard</a> |
-    <a href="../Controller/users_controller.php">Users</a>|
-    <a href="restaurants.php">Restaurants</a> |
-    <a href="orders.php">Orders</a> |
-    <a href="../Controller/logout.php">Logout</a>
 
-    <hr/>
+    <a href="../Controller/users_controller.php">Users</a> |
 
-    <h3>Dashboard Overview</h3>
+    <a href="../Controller/restaurants_controller.php">Restaurants</a> |
 
-    <table border="1" cellpadding="8">
+    <a href="../Controller/order_controller.php">Orders</a> |
+
+    <a href="../Controller/logout_controller.php">Logout</a>
+
+    <hr>
+
+    <h3>Dashboard Statistics</h3>
+
+    <table border="1" cellpadding="10">
 
         <tr>
+
             <th>Total Users</th>
-            <th>Restaurants</th>
+
+            <th>Total Restaurants</th>
+
             <th>Total Orders</th>
+
             <th>Total Revenue</th>
+
         </tr>
 
         <tr>
-            <td>120</td>
-            <td>15</td>
-            <td>350</td>
-            <td>52,000</td>
-        </tr>
 
-    </table>
+            <td><?php echo $total_users; ?></td>
 
-    <br/>
+            <td><?php echo $total_restaurants; ?></td>
 
-    <h3>Recent Orders</h3>
+            <td><?php echo $total_orders; ?></td>
 
-    <table border="1" cellpadding="8">
+            <td><?php echo $total_revenue; ?> BDT</td>
 
-        <tr>
-            <th>Order ID</th>
-            <th>Customer</th>
-            <th>Restaurant</th>
-            <th>Amount</th>
-            <th>Status</th>
-        </tr>
-
-        <tr>
-            <td>101</td>
-            <td>Rahim Uddin</td>
-            <td>ABC Restaurant</td>
-            <td>500 BDT</td>
-            <td>Pending</td>
-        </tr>
-
-        <tr>
-            <td>102</td>
-            <td>Karim Chowdhury</td>
-            <td>Food Corner</td>
-            <td>750 BDT</td>
-            <td>Completed</td>
-        </tr>
-
-        <tr>
-            <td>103</td>
-            <td>Sarah Ahmed</td>
-            <td>Pizza House</td>
-            <td>650 BDT</td>
-            <td>Pending</td>
         </tr>
 
     </table>

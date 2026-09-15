@@ -1,15 +1,24 @@
+<?php
+
+require_once "../Model/order_model.php";
+
+$id = $_GET["id"];
+
+$order = getOrder($id);
+
+?>
 
 <!DOCTYPE html>
 
 <html>
 
 <head>
-    <title>Manage Orders</title>
+    <title>View Order</title>
 </head>
 
 <body>
 
-    <h2>Manage Orders</h2>
+    <h2>Order Details</h2>
 
     <p>Welcome, Admin!</p>
 
@@ -21,63 +30,54 @@
 
     <hr>
 
-    <h3>All Orders</h3>
-
-    <form method="GET" action="../Controller/order_controller.php">
-
-        <input type="text" name="search" placeholder="Search Order ID">
-
-        <button type="submit">Search</button>
-
-    </form>
-
-    <br>
+    <h3>Order Information</h3>
 
     <table border="1" cellpadding="8">
 
         <tr>
-            <th>ID</th>
-            <th>Customer Name</th>
-            <th>Restaurant</th>
-            <th>Rider</th>
-            <th>Order Date</th>
-            <th>Total Amount</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Order ID</th>
+            <td><?php echo $order["id"]; ?></td>
         </tr>
-
-        <?php while ($order = mysqli_fetch_assoc($orders)) { ?>
 
         <tr>
-
-            <td><?php echo $order["id"]; ?></td>
-
+            <th>Customer Name</th>
             <td><?php echo $order["customer_name"]; ?></td>
-
-            <td><?php echo $order["restaurant"]; ?></td>
-
-            <td><?php echo $order["rider"]; ?></td>
-
-            <td><?php echo $order["order_date"]; ?></td>
-
-            <td><?php echo $order["total_amount"]; ?> BDT</td>
-
-            <td><?php echo $order["status"]; ?></td>
-
-            <td>
-
-                <a href="../View/view_order.php?id=<?php echo $order["id"]; ?>">
-                    View
-                </a>
-
-            </td>
-
         </tr>
 
-        <?php } ?>
+        <tr>
+            <th>Restaurant</th>
+            <td><?php echo $order["restaurant"]; ?></td>
+        </tr>
+
+        <tr>
+            <th>Rider</th>
+            <td><?php echo $order["rider"]; ?></td>
+        </tr>
+
+        <tr>
+            <th>Order Date</th>
+            <td><?php echo $order["order_date"]; ?></td>
+        </tr>
+
+        <tr>
+            <th>Total Amount</th>
+            <td><?php echo $order["total_amount"]; ?> BDT</td>
+        </tr>
+
+        <tr>
+            <th>Status</th>
+            <td><?php echo $order["status"]; ?></td>
+        </tr>
 
     </table>
+
+    <br>
+
+    <a href="../Controller/order_controller.php">
+        Back to Orders
+    </a>
 
 </body>
 
 </html>
+

@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $username = $_POST["username"] ?? "";
@@ -26,7 +27,7 @@ if ($username == "admin" && $password == "1234") {
     $_SESSION["loggedInUser"] = $username;
     $_SESSION["isLoggedIn"] = true;
 
-    header("Location: ../View/dashboard.php");
+    header("Location: dashboard_check.php");
     exit();
 
 } else {
@@ -36,5 +37,5 @@ if ($username == "admin" && $password == "1234") {
     header("Location: ../View/login.php");
     exit();
 }
-?>
 
+?>
