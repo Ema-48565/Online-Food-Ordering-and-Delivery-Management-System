@@ -1,6 +1,6 @@
 <?php
+
 session_start();
-require_once "../Model/admin_model.php";
 
 $username = $_POST["username"] ?? "";
 $password = $_POST["password"] ?? "";
@@ -22,16 +22,20 @@ if ($username == "" || $password == "") {
     exit();
 }
 
-$admin = getAdmin($username, $password);
+if ($username == "admin" && $password == "1234") {
 
-if ($admin) {
-    $_SESSION["loggedInUser"] = $admin["username"];
-    $_SESSION["admin_id"] = $admin["id"];
+    $_SESSION["loggedInUser"] = $username;
     $_SESSION["isLoggedIn"] = true;
-    header("Location: ../View/dashboard.php");
+
+    header("Location: dashboard_check.php");
     exit();
+
 } else {
+
     $_SESSION["loginError"] = "Incorrect username or password";
+
     header("Location: ../View/login.php");
     exit();
 }
+
+?>

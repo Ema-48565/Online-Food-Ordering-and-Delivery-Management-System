@@ -1,40 +1,61 @@
-<?php
-session_start();
-if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] != true) {
-    header("Location: login.php");
-    exit();
-}
-?>
 <!DOCTYPE html>
-<html lang="en">
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
+
     <title>Admin Dashboard</title>
+
 </head>
+
 <body>
-    <h2>Welcome, Admin!</h2>
-    <nav>
-        <a href="dashboard.php">Dashboard</a> | 
-        <a href="../Controller/users_controller.php">Users</a> | 
-        <a href="restaurants.php">Restaurants</a> | 
-        <a href="orders.php">Orders</a> | 
-        <a href="../Controller/logout.php">Logout</a>
-    </nav>
+
+    <h2>Admin Dashboard</h2>
+
+    <p>Welcome, Admin!</p>
+
+    <a href="../Controller/dashboard_check.php">Dashboard</a> |
+
+    <a href="../Controller/users_controller.php">Users</a> |
+
+    <a href="../Controller/restaurants_controller.php">Restaurants</a> |
+
+    <a href="../Controller/order_controller.php">Orders</a> |
+
+    <a href="../Controller/logout_controller.php">Logout</a>
+
     <hr>
-    <h3>Dashboard Overview</h3>
+
+    <h3>Dashboard Statistics</h3>
+
     <table border="1" cellpadding="10">
+
         <tr>
+
             <th>Total Users</th>
-            <th>Restaurants</th>
+
+            <th>Total Restaurants</th>
+
             <th>Total Orders</th>
+
             <th>Total Revenue</th>
+
         </tr>
+
         <tr>
-            <td>120</td>
-            <td>15</td>
-            <td>350</td>
-            <td>52,000</td>
+
+            <td><?php echo $total_users; ?></td>
+
+            <td><?php echo $total_restaurants; ?></td>
+
+            <td><?php echo $total_orders; ?></td>
+
+            <td><?php echo $total_revenue; ?> BDT</td>
+
         </tr>
+
     </table>
+
 </body>
+
 </html>

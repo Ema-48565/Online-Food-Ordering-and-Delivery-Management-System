@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] != true) {
@@ -6,13 +7,20 @@ if (!isset($_SESSION["isLoggedIn"]) || $_SESSION["isLoggedIn"] != true) {
     exit();
 }
 
-$search = $_GET["search"] ?? "";
+require_once "../Model/order_model.php";
 
-if ($search != "") {
-    $_SESSION["orderSearch"] = $search;
+if (isset($_GET["search"])) {
+
+    $search = $_GET["search"];
+
+    $orders = searchOrders($search);
+
 } else {
-    unset($_SESSION["orderSearch"]);
+
+    $orders = getOrders();
+
 }
 
-header("Location: ../View/orders.php");
-exit();
+include "../View/orders.php";
+
+?>

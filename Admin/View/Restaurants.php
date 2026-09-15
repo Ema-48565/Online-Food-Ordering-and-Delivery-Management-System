@@ -1,106 +1,100 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
+
 <html>
 
 <head>
+
     <title>Manage Restaurants</title>
+
 </head>
 
 <body>
 
-    <h2>Welcome, Admin!</h2>
-    <a href="dashboard.php">Dashboard</a> |
-    <a href="users.php">Users</a> |
-    <a href="restaurants.php">Restaurants</a> |
-    <a href="orders.php">Orders</a> |
-    <a href="../Controller/logout.php">Logout</a>
+    <h2>Manage Restaurants</h2>
 
-    <hr/>
+    <p>Welcome, Admin!</p>
 
-    <h3>Manage Restaurants</h3>
-    <form action="../Controller/restaurants_controller.php" method="GET">
-        <label>Search Restaurant:</label>
-        <input type="text" name="search" placeholder="Enter restaurant name">
+    <a href="../Controller/dashboard_check.php">Dashboard</a> |
+    <a href="../Controller/users_controller.php">Users</a> |
+    <a href="../Controller/restaurants_controller.php">Restaurants</a> |
+    <a href="../Controller/order_controller.php">Orders</a> |
+    <a href="../Controller/logout_controller.php">Logout</a>
+
+    <hr>
+
+    <h3>All Restaurants</h3>
+
+    <form method="GET" action="../Controller/restaurants_controller.php">
+
+        <input type="text" name="search" placeholder="Search restaurant">
+
         <button type="submit">Search</button>
+
     </form>
 
-    <br/>
-    <a href="add_restaurant.php">Add New Restaurant</a>
+    <br>
 
-    <br/><br/>
+    <a href="../View/add_Restaurants.php">Add New Restaurant</a>
+
+    <br><br>
+
     <table border="1" cellpadding="8">
 
         <tr>
-            <th>Restaurant ID</th>
-            <th>Restaurant Name</th>
-            <th>Owner Name</th>
+
+            <th>ID</th>
+            <th>Name</th>
+            <th>Owner</th>
             <th>Location</th>
             <th>Contact</th>
             <th>Status</th>
             <th>Action</th>
+
         </tr>
+
+        <?php while ($restaurant = mysqli_fetch_assoc($restaurants)) { ?>
+
         <tr>
-            <td>1</td>
-            <td>ABC Restaurant</td>
-            <td>Rahim Uddin</td>
-            <td>Mirpur, Dhaka</td>
-            <td>01700000001</td>
-            <td>Active</td>
+
+            <td><?php echo $restaurant["id"]; ?></td>
+
+            <td><?php echo $restaurant["name"]; ?></td>
+
+            <td><?php echo $restaurant["owner"]; ?></td>
+
+            <td><?php echo $restaurant["location"]; ?></td>
+
+            <td><?php echo $restaurant["contact"]; ?></td>
+
+            <td><?php echo $restaurant["status"]; ?></td>
+
             <td>
-                <a href="edit_restaurant.php?id=1">Edit</a> |
-                <button>Block</button>
+
+                <a href="../View/edit_Restaurants.php?id=<?php echo $restaurant["id"]; ?>">
+                    Edit
+                </a>
+
+                |
+
+                <?php if ($restaurant["status"] == "Active") { ?>
+
+                    <a href="../Controller/restaurants_controller.php?action=block&id=<?php echo $restaurant["id"]; ?>">
+                        Block
+                    </a>
+
+                <?php } else { ?>
+
+                    <a href="../Controller/restaurants_controller.php?action=unblock&id=<?php echo $restaurant["id"]; ?>">
+                        Unblock
+                    </a>
+
+                <?php } ?>
+
             </td>
+
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Food Corner</td>
-            <td>Karim Chowdhury</td>
-            <td>Banani, Dhaka</td>
-            <td>01700000002</td>
-            <td>Active</td>
-            <td>
-                <a href="edit_restaurant.php?id=2">Edit</a> |
-                <button>Block</button>
-            </td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Pizza House</td>
-            <td>Sarah Ahmed</td>
-            <td>Dhanmondi, Dhaka</td>
-            <td>01700000003</td>
-            <td>Blocked</td>
-            <td>
-                <a href="edit_restaurant.php?id=3">Edit</a> |
-                <button>Unblock</button>
-            </td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Spicy Kitchen</td>
-            <td>Hasan Ali</td>
-            <td>Uttara, Dhaka</td>
-            <td>01700000004</td>
-            <td>Active</td>
-            <td>
-                <a href="edit_restaurant.php?id=4">Edit</a> |
-                <button>Block</button>
-            </td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Royal Food</td>
-            <td>Nusrat Jahan</td>
-            <td>Gulshan, Dhaka</td>
-            <td>01700000005</td>
-            <td>Active</td>
-            <td>
-                <a href="edit_restaurant.php?id=5">Edit</a> |
-                <button>Block</button>
-            </td>
-        </tr>
+
+        <?php } ?>
 
     </table>
 

@@ -1,9 +1,5 @@
 <?php
 session_start();
-if(isset($_SESSION['admin_id'])) {
-    header("Location: dashboard.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +24,8 @@ if(isset($_SESSION['admin_id'])) {
                 <tr>
                     <td>Username:</td>
                     <td>
-                        <input type="text" name="username" placeholder="Enter username" />
+                        <input type="text" name="username"
+                               placeholder="Enter username" />
 
                         <?php
                         if (isset($_SESSION["usernameError"])) {
@@ -42,7 +39,8 @@ if(isset($_SESSION['admin_id'])) {
                 <tr>
                     <td>Password:</td>
                     <td>
-                        <input type="password" name="password" placeholder="Enter password" />
+                        <input type="password" name="password"
+                               placeholder="Enter password" />
 
                         <?php
                         if (isset($_SESSION["passwordError"])) {
@@ -73,3 +71,4 @@ if(isset($_SESSION['admin_id'])) {
 </body>
 
 </html>
+
